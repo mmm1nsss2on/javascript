@@ -15,6 +15,41 @@
       </div>
     </div>
 
+    <div id="clock"></div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function(){      
+        
+        const funcTime = function(){
+          const dt = new Date();
+          var hh = dt.getHours();
+          var mm = dt.getMinutes();
+          var ss = dt.getSeconds();
+
+          document.querySelector('#clock').innerHTML = hh + ":" + mm + ":" + ss;
+        }
+        
+        const analogTime = function(){
+          const dt = new Date();
+          var hh = dt.getHours();
+          var mm = dt.getMinutes();
+          var ss = dt.getSeconds();
+
+          var degH = (hh / 12) * 360;
+          var degM = (mm / 60) * 360;
+          var degS = (ss / 60) * 360;
+          document.querySelector('.hour-hand').style.transform = "rotate(" + degH + "deg)";
+          document.querySelector('.min-hand').style.transform = "rotate(" + degM + "deg)";
+          document.querySelector('.second-hand').style.transform = "rotate(" + degS + "deg)";
+        }
+        
+        setInterval(analogTime, 1000);
+
+        analogTime();
+      });
+
+    </script>
+
 
   <style>
     html {
@@ -53,7 +88,16 @@
       position: relative;
       width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+      transform: translateY(-3px) rotate(90deg); /* account for the height of the clock hands */
+    }
+    .hour-hand{
+      transform-origin: right;
+    }
+    .min-hand{
+      transform-origin: right;
+    }
+    .second-hand{
+      transform-origin: right;
     }
 
     .hand {
@@ -62,12 +106,12 @@
       background: black;
       position: absolute;
       top: 50%;
+
     }
 
   </style>
 
   <script>
-
 
   </script>
 </body>
